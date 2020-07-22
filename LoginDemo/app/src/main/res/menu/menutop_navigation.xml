@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/backPrevious"
+        android:title="Back"
+        android:icon="@drawable/ic_back_dark_photo"/>
+    <item
+        android:title="History"
+        />
+    <item
+        android:title="Book Offer"
+      />
+    <item
+        android:id="@+id/notification"
+        android:title="Profile"
+        android:icon="@drawable/ic_notifications"
+        />
+    <item
+        android:id="@+id/myCart"
+        android:title="Cart"
+        android:icon="@drawable/ic_cart_photo"/>
+
+</menu>

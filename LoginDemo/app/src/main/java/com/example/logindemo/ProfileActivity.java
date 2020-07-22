@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +17,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApi;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
@@ -26,9 +26,8 @@ import com.squareup.picasso.Picasso;
 public class ProfileActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private ImageView profile_image;
-    private TextView name;
-    private TextView email;
-    private TextView id;
+    private TextView name, username, mail;
+    private EditText phone, address;
     private Button signOutBtn;
 
     private GoogleApiClient googleApiClient;
@@ -40,8 +39,8 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
 
         profile_image = findViewById(R.id.profile_image);
         name = findViewById(R.id.name);
-        email = findViewById(R.id.email);
-        id = findViewById(R.id.id);
+        username = findViewById(R.id.username);
+        mail = findViewById(R.id.mail);
         signOutBtn = findViewById(R.id.signOutBtn);
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
@@ -76,9 +75,10 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
     private void handleSignInResult(GoogleSignInResult result){
         GoogleSignInAccount account = result.getSignInAccount();
         if (result.isSuccess()) {
+            String []mailU = account.getEmail().split("@");
             name.setText(account.getDisplayName());
-            email.setText(account.getEmail());
-            id.setText(account.getId());
+            username.setText(mailU[0]);
+            mail.setText(account.getEmail());
             Picasso.get().load(account.getPhotoUrl()).placeholder(R.mipmap.ic_launcher).into(profile_image);
         }else {
             gotoMainActivity();

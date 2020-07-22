@@ -8,10 +8,20 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".ProfileActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".SearchBook" />
+        <activity android:name=".NotificationAll" />
+        <activity android:name=".NotificationDetail" />
+        <activity android:name=".homepage" />
+        <activity android:name=".MyHistory" />
+        <activity android:name=".DetailBook" />
+        <activity android:name=".MyCart" />
+        <activity android:name=".BookOffer" /> <!-- <activity android:name=".DetailBook" /> -->
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

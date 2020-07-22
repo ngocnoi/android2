@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homepage"
+        android:title="HomePage"
+        android:icon="@drawable/ic_baseline_home"/>
+    <item
+        android:id="@+id/history"
+        android:title="History"
+        android:icon="@drawable/ic_baseline_history_24"/>
+    <item
+        android:id="@+id/bookOfferMain"
+        android:title="Book Offer"
+        android:icon="@drawable/ic_baseline_add_circle_outline_24"/>
+    <item
+        android:id="@+id/profileActivity"
+        android:title="Profile"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        />
+    <item
+        android:id="@+id/searchBook"
+        android:title="Search book"
+        android:icon="@drawable/ic_baseline_search_24"/>
+
+</menu>

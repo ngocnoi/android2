@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">LoginDemo</string>
+    <string name="_2_books_left">2 Books Left</string>
+    <string name="software_engineering">Software Engineering</string>
+    <string name="by_ronald_j_leach">By Ronald J.Leach</string>
+    <string name="borrow_now">BORROW NOW</string>
+    <string name="todo">TODO</string>
 </resources>

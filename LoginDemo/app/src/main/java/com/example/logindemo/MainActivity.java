@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -62,17 +61,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            final GoogleSignInAccount account = result.getSignInAccount();
-//            String mail = account.getEmail();
-//            System.out.print("#My mail"+mail);
-//            String[] split = mail.split("@");
-//            String domain = split[1]; //This Will Give You The Domain After '@'
-//            if(domain.equals("fpt.edu.vn")) {
-
-            if(result.isSuccess()){
-                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-                finish();
-//                }
+            GoogleSignInAccount account = result.getSignInAccount();
+            String mail = account.getEmail();
+            String[] split = mail.split("@");
+            String domain = split[1]; //This Will Give You The Domain After '@'
+            if(domain.equals("fpt.edu.vn")) {
+                if(result.isSuccess()){
+                    startActivity(new Intent(MainActivity.this, homepage.class));
+                    finish();
+                }
             }else{
                 Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
                     @Override
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         startActivity(new Intent(MainActivity.this, MainActivity.class));
                     }
                 });
-                Toast.makeText(this,"Login Fail"+result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Login Fail", Toast.LENGTH_SHORT).show();
             }
 
         }
