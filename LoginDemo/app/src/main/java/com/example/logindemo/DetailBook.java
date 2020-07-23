@@ -79,6 +79,10 @@ public class DetailBook extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),homepage.class));
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.profileActivity:
+                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                 }
                 return false;
             }

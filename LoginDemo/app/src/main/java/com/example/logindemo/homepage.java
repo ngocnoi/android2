@@ -99,6 +99,7 @@ public class homepage extends AppCompatActivity implements BookAdapter.OnBookLis
                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
                        overridePendingTransition(0,0);
                        return true;
+
                }
                 return false;
             }

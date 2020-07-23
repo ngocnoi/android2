@@ -74,6 +74,10 @@ public class SearchBook extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),MyCart.class));
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.profileActivity:
+                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                 }
                 return false;
             }
