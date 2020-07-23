@@ -11,15 +11,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#fff"
-        app:itemIconTint="@drawable/selector"
-        app:itemTextColor="@drawable/selector"
-        app:layout_constraintBottom_toTopOf="@+id/view"
+        android:background="@android:color/white"
+        app:itemIconTint="@drawable/selector_top_navigation"
+        app:itemTextColor="@drawable/selector_top_navigation"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.238"
+        app:layout_constraintVertical_bias="0.0"
         app:menu="@menu/menutop_navigation"
         tools:ignore="MissingConstraints">
 
@@ -139,13 +139,13 @@
         android:id="@+id/view"
         android:layout_width="412dp"
         android:layout_height="350dp"
+        android:layout_marginBottom="79dp"
         android:background="@color/colorGrey"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView13"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.202" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/borrow2"
