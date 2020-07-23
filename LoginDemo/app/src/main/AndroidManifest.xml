@@ -20,9 +20,9 @@
         <activity android:name=".MyHistory" />
         <activity android:name=".DetailBook" />
         <activity android:name=".MyCart" />
-<!--        <activity android:name=".BookOffer" /> &lt;!&ndash; <activity android:name=".DetailBook" /> &ndash;&gt;-->
+        <activity android:name=".BookOffer" /> <!-- <activity android:name=".DetailBook" /> -->
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".BookOffer">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -83,7 +83,7 @@ public class NotificationAll extends AppCompatActivity {
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         BottomNavigationView bottomNavigationView2=findViewById(R.id.top_navigation);
         //set home select
-       // bottomNavigationView.setSelectedItemId(R.id.homepage);
+       bottomNavigationView2.setSelectedItemId(R.id.notification);
 
         // perform itemselectedListerner
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -122,10 +122,6 @@ public class NotificationAll extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.backPrevious:
-                        return true;
-                    case R.id.history:
-                        startActivity(new Intent(getApplicationContext(),MyHistory.class));
-                        overridePendingTransition(0,0);
                         return true;
                     case R.id.notification:
                         startActivity(new Intent(getApplicationContext(), NotificationAll.class));

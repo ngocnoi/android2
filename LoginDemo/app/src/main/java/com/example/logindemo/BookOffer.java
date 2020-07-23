@@ -66,10 +66,6 @@ public class BookOffer extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.backPrevious:
                         return true;
-                    case R.id.history:
-                        startActivity(new Intent(getApplicationContext(),MyHistory.class));
-                        overridePendingTransition(0,0);
-                        return true;
                     case R.id.notification:
                         startActivity(new Intent(getApplicationContext(), NotificationAll.class));
                         overridePendingTransition(0,0);

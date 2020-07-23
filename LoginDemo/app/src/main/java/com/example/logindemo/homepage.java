@@ -75,7 +75,7 @@ public class homepage extends AppCompatActivity implements BookAdapter.OnBookLis
         //set home select
         bottomNavigationView.setSelectedItemId(R.id.homepage);
 
-        // perform itemselectedListerner
+        // perform itemSelectedListerner
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
