@@ -72,7 +72,6 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
 
         //initialize and assign variable
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
-        BottomNavigationView bottomNavigationView2=findViewById(R.id.top_navigation);
         //set home select
          bottomNavigationView.setSelectedItemId(R.id.profileActivity);
 
@@ -107,26 +106,7 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
             }
         });
         //
-        bottomNavigationView2.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()){
-                    case R.id.backPrevious:
-                        return true;
-                    case R.id.notification:
-                        startActivity(new Intent(getApplicationContext(), NotificationAll.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.myCart:
-                        startActivity(new Intent(getApplicationContext(),MyCart.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                }
-                return false;
-            }
-        });
     }
 
     private void gotoMainActivity(){
