@@ -125,7 +125,7 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
             name.setText(account.getDisplayName());
             username.setText(mailU[0]);
             mail.setText(account.getEmail());
-            Picasso.get().load(account.getPhotoUrl()).placeholder(R.mipmap.ic_launcher).into(profile_image);
+            Picasso.get().load(account.getPhotoUrl()).placeholder(R.drawable.ic_background_photo).into(profile_image);
         }else {
             gotoMainActivity();
         }
