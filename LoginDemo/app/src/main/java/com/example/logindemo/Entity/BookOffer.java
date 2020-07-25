@@ -7,15 +7,15 @@ public class BookOffer {
     String bookName;
     String bookImage;
     String description;
-    public List<User> users;
-    boolean status;
+    public User user;
+    Boolean status;
 
-    public BookOffer(Integer bookOfferId, String bookName, String bookImage, String description, List<User> users, boolean status) {
+    public BookOffer(Integer bookOfferId, String bookName, String bookImage, String description, User user, Boolean status) {
         this.bookOfferId = bookOfferId;
         this.bookName = bookName;
         this.bookImage = bookImage;
         this.description = description;
-        this.users = users;
+        this.user = user;
         this.status = status;
     }
 
@@ -54,19 +54,19 @@ public class BookOffer {
         this.description = description;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 }

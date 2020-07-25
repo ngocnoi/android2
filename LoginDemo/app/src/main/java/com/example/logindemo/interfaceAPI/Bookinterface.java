@@ -3,6 +3,7 @@ package com.example.logindemo.interfaceAPI;
 
 
 import com.example.logindemo.Entity.Book;
+import com.example.logindemo.Entity.BookOffer;
 import com.example.logindemo.Entity.Notification;
 import com.example.logindemo.Entity.User;
 
@@ -35,4 +36,6 @@ public interface Bookinterface {
     @GET("/api/user/{cardNumber}")
     Call<User>  getAllUserByCardNumber(@Path("cardNumber") final String cardNumber);
 
+    @POST("/api/addBookOffer/new")
+    Call<BookOffer> createBookOffer(@Body BookOffer bookOffer);
 }

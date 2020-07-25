@@ -11,7 +11,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.example.logindemo.Entity.Book;
 import com.example.logindemo.Entity.Notification;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
@@ -49,7 +48,7 @@ public class NotificationDetail extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.bookOfferMain:
-                        startActivity(new Intent(getApplicationContext(),BookOffer.class));
+                        startActivity(new Intent(getApplicationContext(), BookOfferDetail.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.history:

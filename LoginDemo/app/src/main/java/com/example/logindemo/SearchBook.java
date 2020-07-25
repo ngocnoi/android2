@@ -35,7 +35,7 @@ public class SearchBook extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.bookOfferMain:
-                        startActivity(new Intent(getApplicationContext(),BookOffer.class));
+                        startActivity(new Intent(getApplicationContext(), BookOfferDetail.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.history:

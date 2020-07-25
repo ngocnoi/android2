@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.logindemo.APIobject.APIbook;
-import com.example.logindemo.Entity.Notification;
 import com.example.logindemo.Entity.User;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -32,8 +31,6 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -159,7 +156,7 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
 
                 switch (item.getItemId()){
                     case R.id.bookOfferMain:
-                        startActivity(new Intent(getApplicationContext(),BookOffer.class));
+                        startActivity(new Intent(getApplicationContext(), BookOfferDetail.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.history:

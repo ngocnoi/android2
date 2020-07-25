@@ -127,10 +127,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                            Log.d(TAG, "onFailure: "+t.fillInStackTrace());
                        }
                    });
-//                    if(callExist.equals("")){
-//
-//                        Log.d(TAG, "onActivityResult: "+callExist.toString());
-//                    }
                     startActivity(new Intent(MainActivity.this, homepage.class));
                     finish();
                 }

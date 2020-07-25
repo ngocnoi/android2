@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -16,9 +15,7 @@ import android.widget.Toast;
 import com.example.logindemo.APIobject.APIbook;
 import com.example.logindemo.Adapter.BookAdapter;
 import com.example.logindemo.Entity.Book;
-import com.example.logindemo.interfaceAPI.Bookinterface;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +79,7 @@ public class homepage extends AppCompatActivity implements BookAdapter.OnBookLis
 
                switch (item.getItemId()){
                    case R.id.bookOfferMain:
-                       startActivity(new Intent(getApplicationContext(),BookOffer.class));
+                       startActivity(new Intent(getApplicationContext(), BookOfferDetail.class));
                        overridePendingTransition(0,0);
                         return true;
                    case R.id.history:

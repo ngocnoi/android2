@@ -3,16 +3,33 @@ package com.example.logindemo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.logindemo.APIobject.APIbook;
+import com.example.logindemo.Entity.Book;
+import com.example.logindemo.Entity.BookOffer;
+import com.example.logindemo.Entity.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class BookOffer extends AppCompatActivity {
+import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class BookOfferDetail extends AppCompatActivity {
+    EditText title, description,link;
+    Button submit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +38,57 @@ public class BookOffer extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full screen
         setContentView(R.layout.activity_book_offer);
+
+        title=findViewById(R.id.txtTitle);
+        description=findViewById(R.id.txtDescription);
+        link=findViewById(R.id.txtLink);
+        submit=findViewById(R.id.txtbutton);
+
+        submit.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                String cardNumber=sharedpreferences.getString("cardNumber",null);
+                Call<User> callID = APIbook.bookinterface().getAllUserByCardNumber(cardNumber);
+                callID.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        User userA=response.body();
+                        userA.getUserId();
+                        BookOffer bookOffer =new BookOffer();
+                        bookOffer.setBookName(title.getText().toString());
+                        bookOffer.setDescription(description.getText().toString());
+                        bookOffer.setBookImage(link.getText().toString());
+                        bookOffer.setStatus(true);
+                        bookOffer.setUser(userA);
+                        Call<BookOffer> callBookOffer = APIbook.bookinterface().createBookOffer(bookOffer);
+                        callBookOffer.enqueue(new Callback<BookOffer>() {
+                            @Override
+                            public void onResponse(Call<BookOffer> call, Response<BookOffer> response) {
+                                Toast.makeText(BookOfferDetail.this, "success", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<BookOffer> call, Throwable t) {
+                                Toast.makeText(BookOfferDetail.this, "fail", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+
+                    }
+                });
+
+
+            }
+        });
+
+
 
         //initialize and assign variable
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
@@ -35,7 +103,7 @@ public class BookOffer extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.bookOfferMain:
-                        startActivity(new Intent(getApplicationContext(),BookOffer.class));
+                        startActivity(new Intent(getApplicationContext(), BookOfferDetail.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.history:

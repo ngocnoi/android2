@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookOffer">
+    tools:context=".BookOfferDetail">
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/top_navigation"
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
         app:layout_constraintVertical_bias="0.622" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/txtLink"
         android:layout_width="290dp"
         android:layout_height="53dp"
         android:layout_marginStart="44dp"
@@ -66,7 +66,7 @@
         app:layout_constraintVertical_bias="0.72" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/txtDescription"
         android:layout_width="290dp"
         android:layout_height="43dp"
         android:layout_marginStart="44dp"
@@ -108,7 +108,7 @@
         app:layout_constraintVertical_bias="0.315" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/txtbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button_blue"
@@ -135,7 +135,7 @@
         app:layout_constraintVertical_bias="0.635" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/txtTitle"
         android:layout_width="290dp"
         android:layout_height="43dp"
         android:layout_marginStart="44dp"
