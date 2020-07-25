@@ -3,8 +3,11 @@ package com.example.logindemo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -15,6 +18,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.logindemo.APIobject.APIbook;
+import com.example.logindemo.Entity.Notification;
+import com.example.logindemo.Entity.User;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -27,15 +33,23 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
-public class ProfileActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class ProfileActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+    private static final String TAG = "ProfileActivity";
     private ImageView profile_image;
     private TextView name, username, mail;
     private EditText phone, address;
     private Button signOutBtn;
+    private Button submit;
 
     private GoogleApiClient googleApiClient;
     private GoogleSignInOptions gso;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +64,29 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
         username = findViewById(R.id.username);
         mail = findViewById(R.id.mail);
         signOutBtn = findViewById(R.id.signOutBtn);
+        phone=findViewById(R.id.txtPhone);
+        address=findViewById(R.id.txtAddress);
+        submit=findViewById(R.id.txtsubmit);
 
+        SharedPreferences sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        String cardNumber=sharedpreferences.getString("cardNumber",null);
+        Log.d(TAG, "cardNumber "+cardNumber);
+        Call<User> callID = APIbook.bookinterface().getAllUserByCardNumber(cardNumber);
+         callID.enqueue(new Callback<User>() {
+             @Override
+             public void onResponse(Call<User> call, Response<User> response) {
+                 User aUser=response.body();
+                address.setText(aUser.getAddress());
+                 phone.setText(aUser.getPhone());
+                 Log.d(TAG, "onResponse: "+response.body());
+             }
+
+             @Override
+             public void onFailure(Call<User> call, Throwable t) {
+
+             }
+         });
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         googleApiClient =new GoogleApiClient.Builder(this).enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
@@ -61,6 +97,10 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
                     @Override
                     public void onResult(@NonNull Status status) {
                         if(status.isSuccess()){
+                            SharedPreferences sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                            editor.clear();
+                            editor.commit();
                             gotoMainActivity();
                         }else{
                             Toast.makeText(ProfileActivity.this,"Log out Fail!", Toast.LENGTH_SHORT).show();
@@ -69,6 +109,43 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
                 });
             }
         });
+        submit.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                String cardNumber=sharedpreferences.getString("cardNumber",null);
+                Call<User> callID = APIbook.bookinterface().getAllUserByCardNumber(cardNumber);
+                callID.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                               User aUserB=response.body();
+                               aUserB.getUserId();
+                               User ab=new User();
+                               ab.setPhone(phone.getText().toString());
+                               ab.setAddress(address.getText().toString());
+                        Call<Void> callUpdate = APIbook.bookinterface().updateUser(aUserB.getUserId(),ab);
+                        callUpdate.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                Toast.makeText(ProfileActivity.this,"success", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Toast.makeText(ProfileActivity.this,"fail", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+
+                    }
+                });
+            }
+        } );
 
         //initialize and assign variable
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);

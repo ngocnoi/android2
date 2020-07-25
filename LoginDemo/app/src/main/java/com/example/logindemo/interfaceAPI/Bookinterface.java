@@ -32,6 +32,7 @@ public interface Bookinterface {
     @PUT("/api/updateUser/{id}")
     Call<Void> updateUser(@Path("id") Integer id, @Body User user);
 
-
+    @GET("/api/user/{cardNumber}")
+    Call<User>  getAllUserByCardNumber(@Path("cardNumber") final String cardNumber);
 
 }

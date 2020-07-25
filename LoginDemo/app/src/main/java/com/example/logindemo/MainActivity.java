@@ -5,7 +5,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -39,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     SignInButton signInButton;
     private GoogleApiClient googleApiClient;
     private static final int SIGN_IN =1;
-
+    SharedPreferences sharedpreferences;
+    public static final String MyPREFERENCES = "MyPrefs" ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             String[] split = mail.split("@");
             String domain = split[1]; //This Will Give You The Domain After '@'
             final String []mailU = account.getEmail().split("@");
+            sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
             if(domain.equals("fpt.edu.vn")) {
                 if(result.isSuccess()){
@@ -86,7 +90,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                        @Override
                        public void onResponse(Call<User> call, Response<User> response) {
                            if (response.code() == 200) {
-
+                               SharedPreferences.Editor editor = sharedpreferences.edit();
+                               editor.putString("cardNumber",mailU[0]);
+                               editor.commit();
                                Log.d(TAG, "onResponse: success, code 200");
                            } else if(response.code() == 404 ){
                                final User user=new User();
@@ -96,6 +102,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                                  user.setFullName(mailFullName);
                                  user.setCardNumber(mailU[0]);
                                  user.setAddress("");
+                               SharedPreferences.Editor editor = sharedpreferences.edit();
+                               editor.putString("cardNumber",mailU[0]);
+                               editor.commit();
                               Call<User> createUser2=APIbook.bookinterface().createUser(user);
                                createUser2.enqueue(new Callback<User>() {
                                    @Override
