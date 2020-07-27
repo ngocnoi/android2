@@ -28,7 +28,7 @@ import retrofit2.Response;
 
 public class homepage extends AppCompatActivity implements BookAdapter.OnBookListener {
     private static final String TAG = homepage.class.getSimpleName();
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, recyclerView1;
     ArrayList<Book> books;
     BookAdapter bookAdapter;
     @Override
@@ -40,6 +40,7 @@ public class homepage extends AppCompatActivity implements BookAdapter.OnBookLis
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full screen
         setContentView(R.layout.activity_homepage);
         recyclerView=findViewById(R.id.recy_id);
+        recyclerView1=findViewById(R.id.recy_category);
         Call<List<Book>> call = APIbook.bookinterface().getAllBooks();
          call.enqueue(new Callback<List<Book>>() {
              @Override
@@ -68,10 +69,41 @@ public class homepage extends AppCompatActivity implements BookAdapter.OnBookLis
                  Toast.makeText(homepage.this, "Failed", Toast.LENGTH_SHORT).show();
              }
          });
+
+        Call<List<Book>> call1 = APIbook.bookinterface().getAllBooks();
+        call1.enqueue(new Callback<List<Book>>() {
+            @Override
+            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+                if(response.isSuccessful()){
+                    final List<Book> bookList = response.body();
+                    bookAdapter = new BookAdapter((ArrayList<Book>) bookList, homepage.this, new BookAdapter.OnBookListener() {
+                        @Override
+                        public void onBookClick(int position) {
+                            Intent i = new Intent(homepage.this, DetailBook.class);
+                            assert bookList != null;
+                            i.putExtra("book_item", bookList.get(position));
+                            startActivity(i);
+                        }
+                    });
+                    Log.d(homepage.class.getSimpleName(), "onResponse: response body");
+                    recyclerView1.setAdapter(bookAdapter);
+                }else {
+                    Toast.makeText(homepage.this, "An Error Occured", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Book>> call, Throwable t) {
+                Log.d(TAG,">>> onFailure "+ t.fillInStackTrace());
+                Toast.makeText(homepage.this, "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
         LinearLayoutManager layoutManager =new LinearLayoutManager(homepage.this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager((layoutManager));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
+        LinearLayoutManager layoutManager1 =new LinearLayoutManager(homepage.this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerView1.setLayoutManager((layoutManager1));
+        recyclerView1.setItemAnimator(new DefaultItemAnimator());
          //initialize and assign variable
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
 

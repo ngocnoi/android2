@@ -13,25 +13,34 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="137dp"
+        android:layout_marginTop="119dp"
         android:text="Book Categories" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recy_category"
+        android:layout_width="match_parent"
+        android:layout_height="228dp"
+        android:layout_below="@+id/txtTitle1"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="5dp"
+        android:paddingTop="50dp" />
 
     <TextView
         android:id="@+id/txtTitle2"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_below="@+id/txtTitle1"
-        android:layout_marginTop="199dp"
+        android:layout_below="@+id/recy_category"
+        android:layout_marginTop="7dp"
         android:text="Popular Books" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recy_id"
         android:layout_width="match_parent"
-        android:layout_height="157dp"
+        android:layout_height="220dp"
         android:layout_above="@+id/bottom_navigation"
         android:layout_below="@+id/txtTitle2"
-        android:layout_marginTop="82dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="3dp"
         android:paddingTop="50dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
