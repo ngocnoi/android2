@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.logindemo.APIobject.APIbook;
+import com.example.logindemo.Entity.Cart;
 import com.example.logindemo.Entity.User;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -66,7 +67,7 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
         submit=findViewById(R.id.txtsubmit);
 
         SharedPreferences sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
+        final SharedPreferences.Editor editor = sharedpreferences.edit();
         String cardNumber=sharedpreferences.getString("cardNumber",null);
         Log.d(TAG, "cardNumber "+cardNumber);
         Call<User> callID = APIbook.bookinterface().getAllUserByCardNumber(cardNumber);
@@ -76,12 +77,12 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
                  User aUser=response.body();
                 address.setText(aUser.getAddress());
                  phone.setText(aUser.getPhone());
-                 Log.d(TAG, "onResponse: "+response.body());
+                 Log.d(TAG, "onResponse: id: "+response.body()+ " "+aUser.getUserId());
              }
 
              @Override
              public void onFailure(Call<User> call, Throwable t) {
-
+                 Log.d(TAG, "onResponse: k nhan dc  ");
              }
          });
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
@@ -111,7 +112,7 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
             @Override
             public void onClick(View v) {
                 SharedPreferences sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedpreferences.edit();
+                final SharedPreferences.Editor editor = sharedpreferences.edit();
                 String cardNumber=sharedpreferences.getString("cardNumber",null);
                 Call<User> callID = APIbook.bookinterface().getAllUserByCardNumber(cardNumber);
                 callID.enqueue(new Callback<User>() {

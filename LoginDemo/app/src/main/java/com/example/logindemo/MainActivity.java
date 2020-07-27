@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.logindemo.APIobject.APIbook;
@@ -46,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
+        getSupportActionBar().hide(); // hide the title bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full screen
         setContentView(R.layout.activity_main);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
@@ -110,11 +116,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                                    @Override
                                    public void onResponse(Call<User> call, Response<User> response) {
                                        Toast.makeText(getApplicationContext(),"successfull",Toast.LENGTH_LONG).show();
+                                       Log.d(TAG, "onResponse: success, code 200");
                                    }
 
                                    @Override
                                    public void onFailure(Call<User> call, Throwable t) {
                                        Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+                                       Log.d(TAG, "onResponse: success, code 404");
                                    }
                                });
                            }else {
@@ -124,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
                        @Override
                        public void onFailure(Call<User> call, Throwable t) {
-                           Log.d(TAG, "onFailure: "+t.fillInStackTrace());
+                           Log.d(TAG, "onFailure: lele "+t.fillInStackTrace());
                        }
                    });
                     startActivity(new Intent(MainActivity.this, homepage.class));

@@ -22,19 +22,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:menu="@menu/menutop_navigation">
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:menu="@menu/menutop_navigation"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
-    <View
-        android:id="@+id/view6"
-        android:layout_width="411dp"
-        android:layout_height="674dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recy_id"
+        android:layout_width="429dp"
+        android:layout_height="700dp"
         android:background="@color/colorGrey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/top_navigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -49,15 +48,6 @@
         tools:ignore="MissingConstraints">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recy_id"
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_navigation" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -106,6 +106,7 @@
         android:layout_marginLeft="36dp"
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="90dp"
+        android:background="@android:color/holo_blue_dark"
         android:text="sign out" />
 
     <EditText
@@ -151,14 +152,15 @@
         android:id="@+id/txtsubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/signOutBtn"
+
         android:layout_below="@+id/txtAddress"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="165dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="159dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="13dp"
+        android:background="@android:color/holo_red_light"
         android:text="Update" />
 
 

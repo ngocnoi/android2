@@ -4,6 +4,7 @@ package com.example.logindemo.interfaceAPI;
 
 import com.example.logindemo.Entity.Book;
 import com.example.logindemo.Entity.BookOffer;
+import com.example.logindemo.Entity.Cart;
 import com.example.logindemo.Entity.Notification;
 import com.example.logindemo.Entity.User;
 
@@ -38,4 +39,12 @@ public interface Bookinterface {
 
     @POST("/api/addBookOffer/new")
     Call<BookOffer> createBookOffer(@Body BookOffer bookOffer);
+
+    @GET("/api/listCartByStatus/{status}/{user}")
+    Call<User>  listCartByStatusAndUser(@Path("status") Integer status, @Body User user);
+
+    @POST("/api/addCart")
+    Call<Void> addCart(@Body Cart cart);
+
+
 }

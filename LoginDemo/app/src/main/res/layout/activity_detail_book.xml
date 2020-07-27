@@ -35,7 +35,7 @@
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <Button
-        android:id="@+id/borrow"
+        android:id="@+id/txtborrow"
         android:layout_width="165dp"
         android:layout_height="60dp"
 

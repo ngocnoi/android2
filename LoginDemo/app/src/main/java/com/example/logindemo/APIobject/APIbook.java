@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIbook {
     //define base url
-    public static String base_url="http://192.168.1.12:8080";
+    public static String base_url="http://10.65.171.29:8080";
 
     //
     public static Retrofit getBook(){

@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.logindemo.APIobject.APIbook;
@@ -32,6 +34,10 @@ public class homepage extends AppCompatActivity implements BookAdapter.OnBookLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
+        getSupportActionBar().hide(); // hide the title bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full screen
         setContentView(R.layout.activity_homepage);
         recyclerView=findViewById(R.id.recy_id);
         Call<List<Book>> call = APIbook.bookinterface().getAllBooks();

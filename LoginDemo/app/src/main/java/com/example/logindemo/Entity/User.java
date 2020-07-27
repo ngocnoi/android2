@@ -1,15 +1,22 @@
 package com.example.logindemo.Entity;
 
-public class User {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class User implements Parcelable {
     Integer userId;
     String fullName;
     String address;
     String phone;
     String mail;
     String cardNumber;
-    boolean status;
+    Boolean status;
+    public List<Cart> carts;
 
-    public User(Integer userId, String fullName, String address, String phone, String mail, String cardNumber, boolean status) {
+    public User(Integer userId, String fullName, String address, String phone, String mail, String cardNumber, Boolean status, List<Cart> carts) {
         this.userId = userId;
         this.fullName = fullName;
         this.address = address;
@@ -17,10 +24,40 @@ public class User {
         this.mail = mail;
         this.cardNumber = cardNumber;
         this.status = status;
+        this.carts = carts;
     }
 
     public User() {
     }
+
+    protected User(Parcel in) {
+        carts = new ArrayList<Cart>();
+        in.readList(carts, getClass().getClassLoader());
+        if (in.readByte() == 0) {
+            userId = null;
+        } else {
+            userId = in.readInt();
+        }
+        fullName = in.readString();
+        address = in.readString();
+        phone = in.readString();
+        mail = in.readString();
+        cardNumber = in.readString();
+        byte tmpStatus = in.readByte();
+        status = tmpStatus == 0 ? null : tmpStatus == 1;
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public Integer getUserId() {
         return userId;
@@ -70,11 +107,41 @@ public class User {
         this.cardNumber = cardNumber;
     }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public List<Cart> getCart() {
+        return carts;
+    }
+
+    public void setCart(List<Cart> cart) {
+        this.carts = cart;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeList(carts);
+        if (userId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(userId);
+        }
+        dest.writeString(fullName);
+        dest.writeString(address);
+        dest.writeString(phone);
+        dest.writeString(mail);
+        dest.writeString(cardNumber);
+        dest.writeByte((byte) (status == null ? 0 : status ? 1 : 2));
     }
 }
